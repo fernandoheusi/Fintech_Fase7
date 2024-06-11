@@ -16,7 +16,7 @@
         </div>
         <div class="balance">
             <h2>Saldo disponível</h2>
-            <p>R$ 17.409,03</p>
+            <p>R$ 17.509,03</p>
         </div>
         <div class="buttons">
             <div class="button"><i class="bi bi-text-left"></i> Extratos</div>
