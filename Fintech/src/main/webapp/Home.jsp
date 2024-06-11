@@ -1,16 +1,5 @@
-<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-	<h1>oi</h1>
-</body>
-</html> --%>
-
 <!-- link do repositório: https://github.com/fernandoheusi/Fintech_fernando_heusi -->
 <!doctype html>
 <html lang="pt-BR">
@@ -24,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@1,700&family=Poppins&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="./css/stylesheet.css"
+    <link rel="stylesheet" href="./css/stylesheet.css">
   </head>
   <body>
 
@@ -46,7 +35,7 @@
         <div class="card-income-outcome">
           <p class="card-title">
             Gastos
-            <img src="./images/Saídas.png" alt="Saidas" class="card-images">
+            <img src="./images/Saidas.png" alt="Saidas" class="card-images">
           </p>
           <p class="card-value">R$ 5.200,00</p>  
         </div>
