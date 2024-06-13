@@ -18,6 +18,8 @@ public interface UsuarioDAO {
         public List<Usuario> listar();
         
         Usuario buscar(int id);
+
+        public Usuario validarUsuario(String email, String senha) throws DBException;
         
         
 }

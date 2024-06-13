@@ -3,6 +3,7 @@
 
 package br.com.fintech.singleton;
 
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 

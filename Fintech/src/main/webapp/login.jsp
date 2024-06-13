@@ -64,13 +64,17 @@
     </style>
 </head>
 <body>
-    <div class="login-container">
+    <div class="login-container">   
+                <!-- Seção de mensagem de sucesso -->
+                <c:if test="${param.status == 'success'}">
+                    <div class="success-message">${param.msg}</div>
+                </c:if>
         <h2>EasyBank</h2>
 
-        <form action="#" method="post">
+        <form action="login" method="post">
             <input type="email" name="email" placeholder="E-mail" required />
 
-            <input type="password" name="password" placeholder="Senha" required />
+            <input type="password" name="senha" placeholder="Senha" required />
 
             <button type="submit" class="button-submit-form">Entrar</button>
         </form>
@@ -78,7 +82,7 @@
         <div class="links-container">
             <a href="#">Esqueceu a senha?</a>
             <span>|</span>
-            <a href="#">Cadastre-se</a>
+            <a href="cadastro.jsp">Cadastre-se</a>
         </div>
     </div>
 </body>
