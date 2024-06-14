@@ -16,11 +16,12 @@ public class OracleContaDAO implements ContaDAO {
     public void criar(Conta conta) throws DBException {
         Connection conexao = null;
         PreparedStatement stmt = null;
+        ResultSet rs = null;
 
         try {
             conexao = ConnectionManager.getInstance().getConnection();
             String sql = "INSERT INTO TB_CONTA_FINTECH (ID_CONTA, NU_AGENCIA, NU_CONTA, VL_SALDO, NM_TITULAR, TP_CONTA, ID_USUARIO) VALUES (SEQ_CONTA_FINTECH.NEXTVAL, ?, ?, ?, ?, ?, ?)";
-            stmt = conexao.prepareStatement(sql);
+            stmt = conexao.prepareStatement(sql, new String[]{"ID_CONTA"});
             stmt.setLong(1, conta.getAgencia());
             stmt.setLong(2, conta.getConta());
             stmt.setDouble(3, conta.getSaldo());
@@ -28,11 +29,17 @@ public class OracleContaDAO implements ContaDAO {
             stmt.setString(5, conta.getTipo());
             stmt.setInt(6, conta.getUsuarioId());
             stmt.executeUpdate();
+
+            rs = stmt.getGeneratedKeys();
+            if (rs.next()) {
+                conta.setId(rs.getInt(1));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
             throw new DBException("Erro ao cadastrar conta.");
         } finally {
             try {
+                if (rs != null) rs.close();
                 if (stmt != null) stmt.close();
                 if (conexao != null) conexao.close();
             } catch (SQLException e) {
@@ -103,13 +110,14 @@ public class OracleContaDAO implements ContaDAO {
 
         try {
             conexao = ConnectionManager.getInstance().getConnection();
-            String sql = "SELECT * FROM TB_CONTA_FINTECH WHERE ID_USUARIO = ?";
+            String sql = "SELECT * FROM TB_CONTA_FINTECH WHERE ID_CONTA = ?";
             stmt = conexao.prepareStatement(sql);
             stmt.setInt(1, id);
             rs = stmt.executeQuery();
 
             if (rs.next()) {
                 conta = new Conta();
+                conta.setId(rs.getInt("ID_CONTA"));
                 conta.setAgencia(rs.getLong("NU_AGENCIA"));
                 conta.setConta(rs.getLong("NU_CONTA"));
                 conta.setSaldo(rs.getDouble("VL_SALDO"));
