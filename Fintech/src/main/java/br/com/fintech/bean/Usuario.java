@@ -11,13 +11,18 @@ public class Usuario {
 	private LocalDate dataNascimento;
 	private String cpf;
 	private String email;
+	private String senha;
 
-	public Usuario(String nome, String tel, String cpf, String email, LocalDate dataNascimento) {
+	public Usuario(String nome, String tel, String cpf, String email, LocalDate dataNascimento, String senha) {
 		this.nome = nome;
 		this.tel = tel;
 		this.cpf = cpf;
 		this.email = email;
 		this.dataNascimento = dataNascimento;
+		this.senha = senha;
+	}
+
+	public Usuario() {
 	}
 
 	public int getId() {
@@ -67,4 +72,12 @@ public class Usuario {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+        this.senha = senha;
+    }
 }

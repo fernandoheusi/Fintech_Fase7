@@ -35,7 +35,7 @@
         }
 
         .credit-card {
-            background-image: url('cartaoimg.png'); /* Substitua 'credit-card.jpg' pelo caminho da sua imagem de cartão de crédito */
+            background-image: url('images/cartao.png'); /* Substitua 'credit-card.jpg' pelo caminho da sua imagem de cartão de crédito */
             background-size: cover;
             background-position: center;
             width: 100%;
@@ -122,6 +122,7 @@
         }
     </style>
 </head>
+<%@include file="navbar.jsp"%>
 <body>
     <div class="credit-card-container">
         <h2>Adicionar Cartão de Crédito</h2>

@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family:  Arial, sans-serif;
+            font-family: Arial, sans-serif;
             background-color: #7879F1;
             margin: 0;
             padding: 0;
@@ -55,7 +55,7 @@
         }
 
         .form-container .button-submit-form:hover {
-            background-color: #7879F1;
+            background-color: #5a5bd8;
         }
 
         .links-container {
@@ -72,18 +72,33 @@
         .links-container a:hover {
             text-decoration: underline;
         }
+
+        .error-message {
+            color: red;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
     <div class="form-container">
         <h2>Cadastro</h2>
 
-        <form action="#" method="post">
+        <!-- Seção de mensagem de erro -->
+        <c:if test="${param.status == 'failure'}">
+            <div class="error-message">${param.msg}</div>
+        </c:if>
+
+        <!-- Seção de mensagem de sucesso -->
+        <c:if test="${not empty msg}">
+            <div class="success-message">${msg}</div>
+        </c:if>
+
+        <form action="cadastrar" method="post">
             <input type="text" name="nome" placeholder="Nome" required />
             <br>
-            <input type="tel" name="telefone" placeholder="Telefone" required />
+            <input type="tel" name="tel" placeholder="Telefone" required />
             <br>
-            <input type="date" name="data_nascimento" placeholder="Data de Nascimento" required />
+            <input type="date" name="dataNascimento" placeholder="Data de Nascimento" required />
             <br>
             <input type="text" name="cpf" placeholder="CPF" required />
             <br>
@@ -95,10 +110,8 @@
         </form>
 
         <div class="links-container">
-            <a href="#">Já possui uma conta? Faça login</a>
+            <a href="login.jsp">Já possui uma conta? Faça login</a>
         </div>
     </div>
 </body>
-</html>
-
 </html>
