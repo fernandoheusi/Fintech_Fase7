@@ -26,13 +26,15 @@ public class OracleMovimentacaoDAO implements MovimentacaoDAO {
 
 	@Override
 	public void salvar(Movimentacao movimentacao) throws DBException {
-		String sql = "INSERT INTO TB_MOVIMENTACAO (ID_MOVIMENTACAO, NM, CATEGORIA, DATA, VALOR) VALUES (SQ_TB_MOVIMENTACAO.NEXTVAL, ?, ?, ?, ?)";
+		String sql = "INSERT INTO TB_MOVIMENTACAO (ID_MOVIMENTACAO, NM, CATEGORIA, DATA_MOVIMENTACAO, VALOR, ID_CONTA, TIPO_TRANSACAO) VALUES (RM553184.SEQ_MOVIMENTACAO.NEXTVAL, ?, ?, ?, ?, ?, ?)";
 		try (Connection conn = ConnectionManager.getInstance().getConnection();
 		     PreparedStatement stmt = conn.prepareStatement(sql)) {
 			stmt.setString(1, movimentacao.getNome());
 			stmt.setString(2, movimentacao.getCategoria());
 			stmt.setDate(3, Date.valueOf(movimentacao.getData()));
 			stmt.setInt(4, movimentacao.getValor());
+			stmt.setInt(5, movimentacao.getConta());
+			stmt.setString(6, movimentacao.getTipoTransacao());
 			stmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -42,13 +44,14 @@ public class OracleMovimentacaoDAO implements MovimentacaoDAO {
 
 	@Override
 	public void atualizar(Movimentacao movimentacao) throws DBException {
-		String sql = "UPDATE TB_MOVIMENTACAO SET NM = ?, CATEGORIA = ?, DATA = ?, VALOR = ? WHERE ID_MOVIMENTACAO = ?";
+		String sql = "UPDATE TB_MOVIMENTACAO SET NM = ?, CATEGORIA = ?, DATA = ?, VALOR = ?, TIPO_TRANSACAO = ? WHERE ID_MOVIMENTACAO = ?";
 		try (Connection conn = ConnectionManager.getInstance().getConnection();
 		     PreparedStatement stmt = conn.prepareStatement(sql)) {
 			stmt.setString(1, movimentacao.getNome());
 			stmt.setString(2, movimentacao.getCategoria());
 			stmt.setDate(3, Date.valueOf(movimentacao.getData()));
 			stmt.setInt(4, movimentacao.getValor());
+			stmt.setString(5, movimentacao.getTipoTransacao());
 			stmt.setInt(6, movimentacao.getId());
 			stmt.executeUpdate();
 		} catch (Exception e) {
@@ -75,18 +78,23 @@ public class OracleMovimentacaoDAO implements MovimentacaoDAO {
 		List<Movimentacao> lista = new ArrayList<>();
 		String sql = "SELECT * FROM TB_MOVIMENTACAO";
 		try (Connection conn = ConnectionManager.getInstance().getConnection();
+				
 		     PreparedStatement stmt = conn.prepareStatement(sql);
 		     ResultSet rs = stmt.executeQuery()) {
 			while (rs.next()) {
-				int id = rs.getInt("ID");
+				int id = rs.getInt("ID_MOVIMENTACAO");
 				String nome = rs.getString("NM");
 				String categoria = rs.getString("CATEGORIA");
-				Date data = rs.getDate("DATA");
+				Date data = rs.getDate("DATA_MOVIMENTACAO");
 				int valor = rs.getInt("VALOR");
-				Movimentacao movimentacao= new Movimentacao(nome, categoria, data.toLocalDate(), valor);
+				int conta = rs.getInt("ID_CONTA");
+				String tipoTransacao = rs.getString("TIPO_TRANSACAO");
+				Movimentacao movimentacao= new Movimentacao(nome, categoria, data.toLocalDate(), valor, tipoTransacao, conta);
 				movimentacao.setId(id);
 				lista.add(movimentacao);
 			}
+			System.out.println("rs" + rs);
+			System.out.println(lista);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -106,8 +114,9 @@ public class OracleMovimentacaoDAO implements MovimentacaoDAO {
 					String categoria = rs.getString("CATEGORIA");
 					Date data = rs.getDate("DATA");
 					int valor = rs.getInt("VALOR");
-					String email = rs.getString("EMAIL");
-					movimentacao = new Movimentacao(nome, categoria, data.toLocalDate(), valor );
+					int conta = rs.getInt("ID_CONTA");
+					String tipoTransacao = rs.getString("TIPO_TRANSACAO");
+					movimentacao = new Movimentacao(nome, categoria, data.toLocalDate(), valor, tipoTransacao, conta);
 					movimentacao.setId(id);
 				}
 			}

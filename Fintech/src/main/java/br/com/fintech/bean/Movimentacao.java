@@ -10,12 +10,16 @@ public class Movimentacao {
 	protected String categoria;
 	private LocalDate data;
 	private int valor;
+	private String tipoTransacao;
+	private int conta;
 
-	public Movimentacao(String nome, String categoria, LocalDate data, int valor) {
+	public Movimentacao(String nome, String categoria, LocalDate data, int valor, String tipoTransacao, int conta) {
 		this.nome = nome;
 		this.categoria = categoria;
 		this.data = data;
 		this.valor = valor;
+		this.tipoTransacao = tipoTransacao;
+		this.conta = conta;
 	}
 
 	public int getId() {
@@ -56,6 +60,22 @@ public class Movimentacao {
 
 	public void setValor(int valor) {
 		this.valor = valor;
+	}
+
+	public String getTipoTransacao() {
+		return tipoTransacao;
+	}
+
+	public void setTipoTransacao(String tipoMovimentacao) {
+		this.tipoTransacao = tipoMovimentacao;
+	}
+
+	public int getConta() {
+		return conta;
+	}
+
+	public void setConta(int conta) {
+		this.conta = conta;
 	}
 }
 
