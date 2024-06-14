@@ -27,8 +27,12 @@ public class MovimentacaoServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         MovimentacaoDAO dao = DAOFactory.getMovimentacaoDAO();
 
+        // Captura o ID da conta da URL
+        String contaStr = request.getParameter("conta");
+        int conta = Integer.parseInt(contaStr);
+
         try {
-            List<Movimentacao> movimentacoes = dao.listar();
+            List<Movimentacao> movimentacoes = dao.listarPorConta(conta);
             request.setAttribute("movimentacoes", movimentacoes);
         } catch (Exception e) {
             e.printStackTrace();

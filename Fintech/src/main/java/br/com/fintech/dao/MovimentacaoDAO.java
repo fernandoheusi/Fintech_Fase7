@@ -17,6 +17,8 @@ public interface MovimentacaoDAO {
 
         public List<Movimentacao> listar();
         
+        public List<Movimentacao> listarPorConta(int IdConta);
+        
         Movimentacao buscar(int id);
         
         
