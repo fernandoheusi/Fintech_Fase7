@@ -25,20 +25,21 @@ public class ContaServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        Integer usuarioId = (Integer) session.getAttribute("usuarioId");
+    	HttpSession session = request.getSession();
+    	Integer usuarioId = (Integer) session.getAttribute("usuarioId");
 
-        System.out.println("ID do Usuário na sessão: " + usuarioId); // Verifique se o ID está na sessão
+    	System.out.println("ID do Usuário na sessão: " + usuarioId); 
 
-        if (usuarioId != null) {
-            Conta conta = contaDAO.buscar(usuarioId);
-            if (conta != null) {
-                request.setAttribute("conta", conta);
-            }
-            request.getRequestDispatcher("menu.jsp").forward(request, response);
-        } else {
-            response.sendRedirect("login.jsp?status=failure&msg=Você precisa fazer login primeiro.");
-        }
+    	if (usuarioId != null) {
+    	    Conta conta = contaDAO.buscar(usuarioId);
+
+    	    if (conta != null) {
+    	        request.setAttribute("conta", conta);
+    	    }
+    	    request.getRequestDispatcher("menu.jsp").forward(request, response);
+    	} else {
+    	    response.sendRedirect("login.jsp?status=failure&msg=Você precisa fazer login primeiro.");
+    	}
     }
   
 

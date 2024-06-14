@@ -49,6 +49,45 @@ public class OracleContaDAO implements ContaDAO {
     }
 
     @Override
+    public Conta buscar(int usuarioId) {
+        Connection conexao = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Conta conta = null;
+
+        try {
+            conexao = ConnectionManager.getInstance().getConnection();
+            String sql = "SELECT * FROM TB_CONTA_FINTECH WHERE ID_USUARIO = ?";
+            stmt = conexao.prepareStatement(sql);
+            stmt.setInt(1, usuarioId);
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                conta = new Conta();
+                conta.setId(rs.getInt("ID_CONTA"));
+                conta.setAgencia(rs.getLong("NU_AGENCIA"));
+                conta.setConta(rs.getLong("NU_CONTA"));
+                conta.setSaldo(rs.getDouble("VL_SALDO"));
+                conta.setTitular(rs.getString("NM_TITULAR"));
+                conta.setTipo(rs.getString("TP_CONTA"));
+                conta.setUsuarioId(rs.getInt("ID_USUARIO"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+                if (conexao != null) conexao.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return conta;
+    }
+
+    @Override
     public void atualizar(Conta conta) throws DBException {
         Connection conexao = null;
         PreparedStatement stmt = null;
@@ -99,44 +138,5 @@ public class OracleContaDAO implements ContaDAO {
                 e.printStackTrace();
             }
         }
-    }
-
-    @Override
-    public Conta buscar(int id) {
-        Connection conexao = null;
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        Conta conta = null;
-
-        try {
-            conexao = ConnectionManager.getInstance().getConnection();
-            String sql = "SELECT * FROM TB_CONTA_FINTECH WHERE ID_CONTA = ?";
-            stmt = conexao.prepareStatement(sql);
-            stmt.setInt(1, id);
-            rs = stmt.executeQuery();
-
-            if (rs.next()) {
-                conta = new Conta();
-                conta.setId(rs.getInt("ID_CONTA"));
-                conta.setAgencia(rs.getLong("NU_AGENCIA"));
-                conta.setConta(rs.getLong("NU_CONTA"));
-                conta.setSaldo(rs.getDouble("VL_SALDO"));
-                conta.setTitular(rs.getString("NM_TITULAR"));
-                conta.setTipo(rs.getString("TP_CONTA"));
-                conta.setUsuarioId(rs.getInt("ID_USUARIO"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (rs != null) rs.close();
-                if (stmt != null) stmt.close();
-                if (conexao != null) conexao.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-
-        return conta;
     }
 }

@@ -139,33 +139,31 @@
     <div class="navbar">
         <div class="navbar-left">
             <img src="images/logo.png" alt="logo">
-            <h3>Olá, Gabi</h3>
+            <h3>Olá, ${conta.titular}</h3>
         </div>
 
         <div class="navbar-right">
             <a href="#">
                 <span class="badge">3</span>
                 <i class="bi bi-bell-fill"></i>
-               
             </a>
         </div>
 
-            <div class="navbar-right">
-                <a href="#">
-                    <i class="bi bi-person-circle"></i>
-                </a>
-            <a href="#">Configurações</a>
-           
+        <div class="navbar-right">
+            <a href="#">
+                <i class="bi bi-person-circle"></i>
+            </a>
+            <a href="logout">Deslogar</a>
         </div>
 
         <div class="menu-icon">&#9776;</div>
 
         <div class="menu">
             <a href="#">Perfil</a>
-            <a href="#">Configurações</a>
+            <a href="logout">Deslogar</a>
             <a href="#">Sair</a>
         </div>
-    </div>	
+    </div>  
     <script>
         // JavaScript para controlar o menu sanduíche
         document.querySelector('.menu-icon').addEventListener('click', function() {

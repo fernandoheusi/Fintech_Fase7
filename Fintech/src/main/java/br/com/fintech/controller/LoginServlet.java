@@ -11,6 +11,7 @@ import br.com.fintech.bean.Usuario;
 import br.com.fintech.dao.UsuarioDAO;
 import br.com.fintech.dao.impl.OracleUsuarioDAO;
 import br.com.fintech.exception.DBException;
+import br.com.fintech.utils.CriptografiaUtils;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
@@ -27,20 +28,21 @@ public class LoginServlet extends HttpServlet {
         String senha = request.getParameter("senha");
         Usuario usuario = null;
 
-        System.out.println("Email recebido: " + email);
-        System.out.println("Senha recebida: " + senha);
-
         try {
-            usuario = usuarioDAO.validarUsuario(email, senha);
+            // Criptografar a senha recebida antes da validação
+            String senhaCriptografada = CriptografiaUtils.criptografar(senha);
+            usuario = usuarioDAO.validarUsuario(email, senhaCriptografada);
         } catch (DBException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         if (usuario != null) {
-            HttpSession session = request.getSession();
-            session.setAttribute("usuario", usuario);
-            session.setAttribute("usuarioId", usuario.getId()); 
-            response.sendRedirect("conta");
+        	HttpSession session = request.getSession();
+        	session.setAttribute("usuarioId", usuario.getId());
+        	session.setAttribute("usuario", usuario);
+        	response.sendRedirect("conta");
         } else {
             response.sendRedirect("login.jsp?status=failure&msg=Email ou senha inválidos.");
         }

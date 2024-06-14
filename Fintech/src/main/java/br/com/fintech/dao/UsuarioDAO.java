@@ -9,5 +9,5 @@ public interface UsuarioDAO {
     void deletar(int id) throws DBException;
     Usuario buscar(int id) throws DBException;
     Usuario validarUsuario(String email, String senha) throws DBException;
-    Usuario buscarPorEmail(String email) throws DBException; // Novo método
+    Usuario buscarPorEmail(String email) throws DBException;
 }
