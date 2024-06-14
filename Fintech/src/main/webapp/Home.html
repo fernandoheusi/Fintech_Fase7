@@ -1,6 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <!doctype html>
+<!doctype html>
 <html lang="pt-BR">
   <head>
     <meta charset="utf-8">
@@ -38,12 +36,6 @@
           <p class="card-value">R$ 5.200,00</p>
         </div>
       </div>
-      <% int n = 14; %>
-      <%for (int x = 0; x < n; x++){ %>
-      
-      	<li><%= x %></li>
-      	
-      <%} %>
       
       
       <div class="container" id="list"tor>
@@ -77,6 +69,24 @@
           </div>
         </div>
 
+        <!-- <div class="modal fade" id="nova-movimentacao" tabindex="-1" role="dialog">
+          <form >
+            <div>
+              <input class="text-input" placeholder="nome da movimentacao" type="text" id="nome-movimentacao"/>
+              <input class="text-input" placeholder="valor da movimentacao" type="number" id="valor-movimentacao" />
+            </div>
+
+            <div>
+							<input type="radio" id="despesa" name="despesaOuReceita" value="despesa">
+							<label for="despesa">Despesa</label>
+							<input type="radio" id="receita" name="despesaOuReceita" value="receita">
+							<label for="receita">Receita</label>
+            </div>
+
+            <input type="submit" value="Cadastrar Movimentacao" data-bs-dismiss="modal">
+					</form>
+				</div> -->
+      
         <div class="list-item">
           <div class="icon-plus-description">
             <img src="./images/food.png" alt="Saidas" class="card-images">
