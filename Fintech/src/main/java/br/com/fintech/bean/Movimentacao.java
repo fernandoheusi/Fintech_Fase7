@@ -1,4 +1,4 @@
-// A classe Usuario é uma classe que representa um usuário do sistema. 
+// A classe Movimentacao é uma classe que representa uma movimentacao do sistema. 
 // ela é bean pois contém apenas atributos e métodos de acesso a esses atributos.
 package br.com.fintech.bean;
 
@@ -7,17 +7,15 @@ import java.time.LocalDate;
 public class Movimentacao {
 	private int id;
 	protected String nome;
-	private String tel;
-	private LocalDate dataNascimento;
-	private String cpf;
-	private String email;
+	protected String categoria;
+	private LocalDate data;
+	private int valor;
 
-	public Movimentacao(String nome, String tel, String cpf, String email, LocalDate dataNascimento) {
+	public Movimentacao(String nome, String categoria, LocalDate data, int valor) {
 		this.nome = nome;
-		this.tel = tel;
-		this.cpf = cpf;
-		this.email = email;
-		this.dataNascimento = dataNascimento;
+		this.categoria = categoria;
+		this.data = data;
+		this.valor = valor;
 	}
 
 	public int getId() {
@@ -36,36 +34,28 @@ public class Movimentacao {
 		this.nome = nome;
 	}
 
-	public String getTel() {
-		return tel;
+	public String getCategoria() {
+		return categoria;
 	}
 
-	public void setTel(String tel) {
-		this.tel = tel;
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
 	}
 
-	public LocalDate getDataNascimento() {
-		return dataNascimento;
+	public LocalDate getData() {
+		return data;
 	}
 
-	public void setDataNascimento(LocalDate dataNascimento) {
-		this.dataNascimento = dataNascimento;
+	public void setData(LocalDate data) {
+		this.data = data;
 	}
 
-	public String getCpf() {
-		return cpf;
+	public int getValor() {
+		return valor;
 	}
 
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
+	public void setValor(int valor) {
+		this.valor = valor;
 	}
 }
 

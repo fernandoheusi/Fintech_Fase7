@@ -6,7 +6,9 @@
 package br.com.fintech.factory;
 
 import br.com.fintech.dao.UsuarioDAO;
+import br.com.fintech.dao.MovimentacaoDAO;
 import br.com.fintech.dao.impl.OracleUsuarioDAO;
+import br.com.fintech.dao.impl.OracleMovimentacaoDAO;
 
 public class DAOFactory {
  
@@ -14,4 +16,7 @@ public class DAOFactory {
         return new OracleUsuarioDAO();
     }
 
+    public static MovimentacaoDAO getMovimentacaoDAO() {
+        return new OracleMovimentacaoDAO();
+    }
 }

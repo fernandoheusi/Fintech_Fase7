@@ -1,4 +1,6 @@
-<!doctype html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <!doctype html>
 <html lang="pt-BR">
   <head>
     <meta charset="utf-8">
@@ -36,39 +38,51 @@
           <p class="card-value">R$ 5.200,00</p>
         </div>
       </div>
+      <% int n = 14; %>
+      <%for (int x = 0; x < n; x++){ %>
+      
+      	<li><%= x %></li>
+      	
+      <%} %>
       
       
       <div class="container" id="list"tor>
 				<div id="button-div">
-          <button type="button" data-toggle="modal" data-target="#nova-movimentacao">
-						<p>+</p>
+          <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+						<p>Cadastrar nova movimentacao</p>
 					</button>
 				</div>
 
-        <div class="modal" id="nova-movimentacao" >
-          <form >
-            <div>
-              <input class="text-input" placeholder="nome da movimentacao" type="text" id="nome-movimentacao"/>
-              <input class="text-input" placeholder="valor da movimentacao" type="number" id="valor-movimentacao" />
-            </div>
-
-            <div>
-							<input type="radio" id="despesa" name="despesaOuReceita" value="despesa">
-							<label for="despesa">Despesa</label>
-							<input type="radio" id="receita" name="despesaOuReceita" value="receita">
-							<label for="receita">Receita</label>
-            </div>
-
-            <input type="submit" value="Cadastrar Movimentacao" data-bs-dismiss="modal">
-					</form>
-				</div>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-body">
+                <form >
+                  <div>
+                    <input class="text-input" placeholder="nome da movimentacao" type="text" id="nome-movimentacao"/>
+                    <input class="text-input" placeholder="valor da movimentacao" type="number" id="valor-movimentacao" />
+                  </div>
       
+                  <div>
+                    <input type="radio" id="despesa" name="despesaOuReceita" value="despesa">
+                    <label for="despesa">Despesa</label>
+                    <input type="radio" id="receita" name="despesaOuReceita" value="receita">
+                    <label for="receita">Receita</label>
+                  </div>
+      
+                  <input type="submit" value="Cadastrar Movimentacao" data-bs-dismiss="modal">
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div class="list-item">
           <div class="icon-plus-description">
             <img src="./images/food.png" alt="Saidas" class="card-images">
             <div class="description">
               <p class="item-type">Comida</p>
-              <p class="item-description">Lanchonete do Zé</p>
+              <p class="item-description">Lanchonete do ZÃ©</p>
             </div>
           </div>
           <p class="value-outcome">-R$40,00</p>
@@ -79,7 +93,7 @@
             <img src="./images/cinema.png" alt="Saidas" class="card-images">
             <div class="description">
               <p class="item-type">Comida</p>
-              <p class="item-description">Lanchonete do Zé</p>
+              <p class="item-description">Lanchonete do ZÃ©</p>
             </div>
           </div>
           <p class="value-outcome">-R$40,00</p>
@@ -90,7 +104,7 @@
             <img src="./images/food.png" alt="Saidas" class="card-images">
             <div class="description">
               <p class="item-type">Comida</p>
-              <p class="item-description">Lanchonete do Zé</p>
+              <p class="item-description">Lanchonete do ZÃ©</p>
             </div>
           </div>
           <p class="value-outcome">-R$40,00</p>
@@ -101,7 +115,7 @@
             <img src="./images/market.png" alt="Saidas" class="card-images">
             <div class="description">
               <p class="item-type">Comida</p>
-              <p class="item-description">Lanchonete do Zé</p>
+              <p class="item-description">Lanchonete do ZÃ©</p>
             </div>
           </div>
           <p class="value-outcome">-R$40,00</p>
@@ -112,7 +126,7 @@
             <img src="./images/studies.png" alt="Saidas" class="card-images">
             <div class="description">
               <p class="item-type">Comida</p>
-              <p class="item-description">Lanchonete do Zé</p>
+              <p class="item-description">Lanchonete do ZÃ©</p>
             </div>
           </div>
           <p class="value-outcome">-R$40,00</p>
@@ -123,15 +137,13 @@
             <img src="./images/money.png" alt="Saidas" class="card-images">
             <div class="description">
               <p class="item-type">Comida</p>
-              <p class="item-description">Lanchonete do Zé</p>
+              <p class="item-description">Lanchonete do ZÃ©</p>
             </div>
           </div>
           <p class="value-income">-R$40,00</p>
         </div>
       </div>
 
-    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script> -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
   </body>
 </html>
