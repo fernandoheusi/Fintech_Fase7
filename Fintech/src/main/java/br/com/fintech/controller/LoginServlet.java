@@ -30,17 +30,17 @@ public class LoginServlet extends HttpServlet {
         System.out.println("Email recebido: " + email);
         System.out.println("Senha recebida: " + senha);
 
-		try {
-			usuario = usuarioDAO.validarUsuario(email, senha);
-		} catch (DBException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        try {
+            usuario = usuarioDAO.validarUsuario(email, senha);
+        } catch (DBException e) {
+            e.printStackTrace();
+        }
 
         if (usuario != null) {
             HttpSession session = request.getSession();
             session.setAttribute("usuario", usuario);
-            response.sendRedirect("menu.jsp");
+            session.setAttribute("usuarioId", usuario.getId()); 
+            response.sendRedirect("conta");
         } else {
             response.sendRedirect("login.jsp?status=failure&msg=Email ou senha inválidos.");
         }

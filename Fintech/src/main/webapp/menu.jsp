@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -12,23 +13,22 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>Agência 0002 - Conta 12769-3</h1>
+            <h1>AgÃªncia ${conta.agencia} - Conta ${conta.conta}</h1>
         </div>
         <div class="balance">
-            <h2>Saldo disponível</h2>
-            <p>R$ 17.509,03</p>
+            <h2>Saldo disponÃ­vel</h2>
+            <p>R$ ${conta.saldo}</p>
         </div>
         <div class="buttons">
             <div class="button"><i class="bi bi-text-left"></i> Extratos</div>
             <div class="button"><i class="bi bi-graph-up-arrow"></i> Investimentos</div>
             <div class="button"><i class="bi bi-people-fill"></i> Fale com Luna</div>
             <div class="button"><i class="bi bi-upc-scan"></i> Boletos</div>
-            <div class="button"><i class="bi bi-gift-fill"></i> + Benefícios</div>
+            <div class="button"><i class="bi bi-gift-fill"></i> + BenefÃ­cios</div>
             <div class="button"><i class="bi bi-person-fill-up"></i> Programa de Fidelidade</div>
-            <div class="button"><i class="bi bi-currency-dollar"></i> Limites de crédito</div>
-            <div class="button"><i class="bi bi-currency-exchange"></i> Empréstimos</div>
+            <div class="button"><i class="bi bi-currency-dollar"></i> Limites de crÃ©dito</div>
+            <div class="button"><i class="bi bi-currency-exchange"></i> EmprÃ©stimos</div>
         </div>
     </div>
 </body>
 </html>
-    
