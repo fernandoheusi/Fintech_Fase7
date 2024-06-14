@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page import="java.util.List" %>
+<%@ page import="br.com.fintech.bean.Movimentacao" %>
     <!doctype html>
 <html lang="pt-BR">
   <head>
@@ -38,12 +40,8 @@
           <p class="card-value">R$ 5.200,00</p>
         </div>
       </div>
-      <% int n = 14; %>
-      <%for (int x = 0; x < n; x++){ %>
       
-      	<li><%= x %></li>
-      	
-      <%} %>
+      
       
       
       <div class="container" id="list"tor>
@@ -57,93 +55,55 @@
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-body">
-                <form >
-                  <div>
-                    <input class="text-input" placeholder="nome da movimentacao" type="text" id="nome-movimentacao"/>
-                    <input class="text-input" placeholder="valor da movimentacao" type="number" id="valor-movimentacao" />
-                  </div>
-      
-                  <div>
-                    <input type="radio" id="despesa" name="despesaOuReceita" value="despesa">
-                    <label for="despesa">Despesa</label>
-                    <input type="radio" id="receita" name="despesaOuReceita" value="receita">
-                    <label for="receita">Receita</label>
-                  </div>
-      
-                  <input type="submit" value="Cadastrar Movimentacao" data-bs-dismiss="modal">
-                </form>
+                <form action="home" method="post">
+    <div>
+        <input class="text-input" name="nomeNovaMovimentacao" placeholder="nome da movimentacao" type="text" id="nomeNovaMovimentacao" required />
+        <input class="text-input" name="valorNovaMovimentacao" placeholder="valor da movimentacao" type="number" id="valorNovaMovimentacao" required />
+        <select class="text-input" name="categoriaNovaMovimentacao" id="categoriaNovaMovimentacao" required >
+            <option value="entreterimento">Entreterimento</option>
+            <option value="mercado">Mercado</option>
+            <option value="estudos">Estudos</option>
+            <option value="viagem">Viagem</option>
+            <option value="comida">Comida</option>
+            <option value="combustivel">Combustivel</option>
+        </select>
+        <input type="date" name="dataNovaMovimentacao" placeholder="Data da Transacao" required />
+        <input type="hidden" name="conta" value="${param.conta}" />
+    </div>
+
+    <div>
+        <input type="radio" id="despesa" name="tipoTransacao" value="despesa">
+        <label for="despesa">Despesa</label>
+        <input type="radio" id="receita" name="tipoTransacao" value="receita">
+        <label for="receita">Receita</label>
+    </div>
+
+    <input type="submit" value="Cadastrar Movimentacao" data-bs-dismiss="modal">
+</form>
               </div>
             </div>
           </div>
         </div>
-
-        <div class="list-item">
-          <div class="icon-plus-description">
-            <img src="./images/food.png" alt="Saidas" class="card-images">
-            <div class="description">
-              <p class="item-type">Comida</p>
-              <p class="item-description">Lanchonete do Zé</p>
-            </div>
-          </div>
-          <p class="value-outcome">-R$40,00</p>
-        </div>
         
-        <div class="list-item">
-          <div class="icon-plus-description">
-            <img src="./images/cinema.png" alt="Saidas" class="card-images">
-            <div class="description">
-              <p class="item-type">Comida</p>
-              <p class="item-description">Lanchonete do Zé</p>
-            </div>
-          </div>
-          <p class="value-outcome">-R$40,00</p>
-        </div>
-
-        <div class="list-item">
+      <% 
+      	List<Movimentacao> movimentacoes = (List<Movimentacao>) request.getAttribute("movimentacoes");
+      	System.out.println("jsp movimentacoes: " + movimentacoes);
+      %>
+      <%for (Movimentacao m : movimentacoes) {%>
+      
+		<div class="list-item">
           <div class="icon-plus-description">
             <img src="./images/food.png" alt="Saidas" class="card-images">
             <div class="description">
-              <p class="item-type">Comida</p>
-              <p class="item-description">Lanchonete do Zé</p>
+              <p class="item-type"><%=m.getCategoria()%></p>
+              <p class="item-description"><%=m.getNome()%></p>
             </div>
           </div>
-          <p class="value-outcome">-R$40,00</p>
+          <p class="value-outcome">-R$<%=m.getValor()%></p>
         </div>
-
-        <div class="list-item">
-          <div class="icon-plus-description">
-            <img src="./images/market.png" alt="Saidas" class="card-images">
-            <div class="description">
-              <p class="item-type">Comida</p>
-              <p class="item-description">Lanchonete do Zé</p>
-            </div>
-          </div>
-          <p class="value-outcome">-R$40,00</p>
-        </div>
-
-        <div class="list-item">
-          <div class="icon-plus-description">
-            <img src="./images/studies.png" alt="Saidas" class="card-images">
-            <div class="description">
-              <p class="item-type">Comida</p>
-              <p class="item-description">Lanchonete do Zé</p>
-            </div>
-          </div>
-          <p class="value-outcome">-R$40,00</p>
-        </div>
-
-        <div class="list-item">
-          <div class="icon-plus-description">
-            <img src="./images/money.png" alt="Saidas" class="card-images">
-            <div class="description">
-              <p class="item-type">Comida</p>
-              <p class="item-description">Lanchonete do Zé</p>
-            </div>
-          </div>
-          <p class="value-income">-R$40,00</p>
-        </div>
-      </div>
-
+      	
+      <%} %>
+        
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
   </body>
 </html>
