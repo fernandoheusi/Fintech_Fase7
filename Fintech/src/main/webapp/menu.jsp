@@ -21,7 +21,7 @@
             <p>R$ ${conta.saldo}</p>
         </div>
         <div class="buttons">
-            <a href="home?conta=${conta.conta} }"><div class="button"><i class="bi bi-text-left"></i> Extratos</div></a>
+            <a href="home?conta=${conta.id}"><div class="button"><i class="bi bi-text-left"></i> Extratos</div></a>
             <div class="button"><i class="bi bi-graph-up-arrow"></i> Investimentos</div>
             <div class="button"><i class="bi bi-people-fill"></i> Fale com Luna</div>
             <div class="button"><i class="bi bi-upc-scan"></i> Boletos</div>

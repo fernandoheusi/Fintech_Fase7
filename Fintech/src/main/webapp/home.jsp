@@ -55,31 +55,31 @@
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-body">
-                <form  action="home" method="post">
-                  <div>
-                    <input class="text-input" name="nomeNovaMovimentacao" placeholder="nome da movimentacao" type="text" id="nomeNovaMovimentacao" required />
-                    <input class="text-input" name="valorNovaMovimentacao" placeholder="valor da movimentacao" type="number" id="valorNovaMovimentacao" required />
-					  <select class="text-input" name="categoriaNovaMovimentacao" id="categoriaNovaMovimentacao" required >
-						<option value="entreterimento">Entreterimento</option>
-						<option value="mercado">Mercado</option>
-						<option value="estudos">Estudos</option>
-						<option value="viagem">"Viagem"</option>
-						<option value="comida">"Comida"</option>
-						<option value="combustivel">"Combustivel"</option>
-					  </select>
-					<input type="date" name="dataNovaMovimentacao" placeholder="Data da Transacao" required />
-						  
-                  </div>
-      
-                  <div>
-                    <input type="radio" id="despesa" name="tipoTransacao" value="despesa">
-                    <label for="despesa">Despesa</label>
-                    <input type="radio" id="receita" name="tipoTransacao" value="receita">
-                    <label for="receita">Receita</label>
-                  </div>
-      
-                  <input type="submit" value="Cadastrar Movimentacao" data-bs-dismiss="modal">
-                </form>
+                <form action="home" method="post">
+    <div>
+        <input class="text-input" name="nomeNovaMovimentacao" placeholder="nome da movimentacao" type="text" id="nomeNovaMovimentacao" required />
+        <input class="text-input" name="valorNovaMovimentacao" placeholder="valor da movimentacao" type="number" id="valorNovaMovimentacao" required />
+        <select class="text-input" name="categoriaNovaMovimentacao" id="categoriaNovaMovimentacao" required >
+            <option value="entreterimento">Entreterimento</option>
+            <option value="mercado">Mercado</option>
+            <option value="estudos">Estudos</option>
+            <option value="viagem">Viagem</option>
+            <option value="comida">Comida</option>
+            <option value="combustivel">Combustivel</option>
+        </select>
+        <input type="date" name="dataNovaMovimentacao" placeholder="Data da Transacao" required />
+        <input type="hidden" name="conta" value="${param.conta}" />
+    </div>
+
+    <div>
+        <input type="radio" id="despesa" name="tipoTransacao" value="despesa">
+        <label for="despesa">Despesa</label>
+        <input type="radio" id="receita" name="tipoTransacao" value="receita">
+        <label for="receita">Receita</label>
+    </div>
+
+    <input type="submit" value="Cadastrar Movimentacao" data-bs-dismiss="modal">
+</form>
               </div>
             </div>
           </div>

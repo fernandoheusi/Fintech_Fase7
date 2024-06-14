@@ -2,11 +2,8 @@ package br.com.fintech.controller;
 
 import java.io.IOException;
 import java.util.List;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.sql.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,82 +16,57 @@ import br.com.fintech.dao.MovimentacaoDAO;
 import br.com.fintech.exception.DBException;
 import br.com.fintech.factory.DAOFactory;
 
-/**
- * Servlet implementation class UsuarioServlet
- */
 @WebServlet("/home")
 public class MovimentacaoServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+    private static final long serialVersionUID = 1L;
+
     public MovimentacaoServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("doGet");
-		// TODO Auto-generated method stub
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         MovimentacaoDAO dao = DAOFactory.getMovimentacaoDAO();
-        
+
         try {
             List<Movimentacao> movimentacoes = dao.listar();
-            System.out.println(movimentacoes);
-            for (Movimentacao m : movimentacoes) {
-                System.out.println("Movimentacao: " + m.getNome() + ", categoria: " + m.getCategoria() + ", data: " + m.getData() + ", valor: " + m.getValor() );
-            }
             request.setAttribute("movimentacoes", movimentacoes);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+        request.getRequestDispatcher("home.jsp").forward(request, response);
+    }
 
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-		request.getRequestDispatcher("home.jsp").forward(request, response);
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         MovimentacaoDAO dao = DAOFactory.getMovimentacaoDAO();
 
-		
         String nomeNovaMovimentacao = request.getParameter("nomeNovaMovimentacao");
         String categoriaNovaMovimentacao = request.getParameter("categoriaNovaMovimentacao");
-		String stringValorNovaMovimentacao = request.getParameter("valorNovaMovimentacao");
-		int valorNovaMovimentacao = Integer.parseInt(stringValorNovaMovimentacao);
+        String stringValorNovaMovimentacao = request.getParameter("valorNovaMovimentacao");
+        int valorNovaMovimentacao = Integer.parseInt(stringValorNovaMovimentacao);
         String dataNovaMovimentacaoStr = request.getParameter("dataNovaMovimentacao");
         String tipoTransacao = request.getParameter("tipoTransacao");
-        int conta = Integer.parseInt(request.getParameter("conta"));
+
+        // Captura o ID da conta da URL ou do parâmetro do formulário
+        String contaStr = request.getParameter("conta");
+        int conta = Integer.parseInt(contaStr);
+
         LocalDate dataNovaMovimentacao;
-        
         try {
-        	dataNovaMovimentacao = LocalDate.parse(dataNovaMovimentacaoStr);
+            dataNovaMovimentacao = LocalDate.parse(dataNovaMovimentacaoStr);
         } catch (DateTimeParseException e) {
             request.setAttribute("erro", "Data de nascimento inválida.");
             request.getRequestDispatcher("home.jsp").forward(request, response);
             return;
         }
 
-        Movimentacao novaMovimentacao = new Movimentacao(nomeNovaMovimentacao,categoriaNovaMovimentacao, dataNovaMovimentacao, valorNovaMovimentacao, tipoTransacao, conta);
-		System.out.println(novaMovimentacao);
+        Movimentacao novaMovimentacao = new Movimentacao(nomeNovaMovimentacao, categoriaNovaMovimentacao, dataNovaMovimentacao, valorNovaMovimentacao, tipoTransacao, conta);
         try {
             dao.salvar(novaMovimentacao);
         } catch (DBException e) {
             e.printStackTrace();
-//            response.sendRedirect("home.jsp?status=failure&msg=Erro ao cadastrar movimentacao");
         } finally {
-            response.sendRedirect("home");
-
+            response.sendRedirect("home?conta=" + conta);
         }
-
-	}
-
+    }
 }
